@@ -1,0 +1,335 @@
+hive> show databases;
+OK
+custom
+custopm
+default
+employee
+onkar
+Time taken: 0.887 seconds, Fetched: 5 row(s)
+
+
+hive> CREATE DATABASE IF NOT EXISTS OLYMPIC;
+
+hive> use OLYMPIC;
+OK
+Time taken: 0.07 seconds
+
+hive> set hive.cli.print.current.db=true;
+hive (OLYMPIC)> CREATE TABLE OLYMPIC_DATA(ATHLETE STRING,AGE INT,COUNTRY STRING, YEAR INT,CLOSING_DATE STRING,SPORT STRING,GOLD_MEDALS INT,SILVER_MEDALS INT,BRONZE_MEDALS INT,TOTAL_MEDALS INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+OK
+Time taken: 0.672 seconds
+
+
+hive (OLYMPIC)> DESCRIBE OLYMPIC_DATA;
+OK
+athlete             	string              	                    
+age                 	int                 	                    
+country             	string              	                    
+year                	int                 	                    
+closing_date        	string              	                    
+sport               	string              	                    
+gold_medals         	int                 	                    
+silver_medals       	int                 	                    
+bronze_medals       	int                 	                    
+total_medals        	int                 	                    
+Time taken: 1.196 seconds, Fetched: 10 row(s)
+
+
+hive (OLYMPIC)> LOAD DATA LOCAL INPATH '/home/acadgild/Onkar/Session15/olympix_data.txt' INTO TABLE OLYMPIC_DATA;
+
+1]
+
+hive (OLYMPIC)> SELECT COUNTRY, SUM(TOTAL_MEDALS) FROM OLYMPIC_DATA WHERE SPORT = 'Swimming' GROUP BY COUNTRY;
+
+Output -->>
+
+Argentina	1
+Australia	163
+Austria	3
+Belarus	2
+Brazil	8
+Canada	5
+China	35
+Costa Rica	2
+Croatia	1
+Denmark	1
+France	39
+Germany	32
+Great Britain	11
+Hungary	9
+Italy	16
+Japan	43
+Lithuania	1
+Netherlands	46
+Norway	2
+Poland	3
+Romania	6
+Russia	20
+Serbia	1
+Slovakia	2
+Slovenia	1
+South Africa	11
+South Korea	4
+Spain	3
+Sweden	9
+Trinidad and Tobago	1
+Tunisia	3
+Ukraine	7
+United States	267
+Zimbabwe	7
+Time taken: 31.37 seconds, Fetched: 34 row(s)
+hive (OLYMPIC)> 
+
+2]
+
+hive (OLYMPIC)> SELECT YEAR, SUM(TOTAL_MEDALS) FROM OLYMPIC_DATA WHERE COUNTRY = 'India' GROUP BY YEAR;
+
+Output -->>
+
+OK
+2000	1
+2004	1
+2008	3
+2012	6
+Time taken: 30.348 seconds, Fetched: 4 row(s)
+
+
+3]
+
+hive (OLYMPIC)> SELECT COUNTRY, SUM(TOTAL_MEDALS) FROM OLYMPIC_DATA GROUP BY COUNTRY;
+
+Output -->>
+OK
+Afghanistan	2
+Algeria	8
+Argentina	141
+Armenia	10
+Australia	609
+Austria	91
+Azerbaijan	25
+Bahamas	24
+Bahrain	1
+Barbados	1
+Belarus	97
+Belgium	18
+Botswana	1
+Brazil	221
+Bulgaria	41
+Cameroon	20
+Canada	370
+Chile	22
+China	530
+Chinese Taipei	20
+Colombia	13
+Costa Rica	2
+Croatia	81
+Cuba	188
+Cyprus	1
+Czech Republic	81
+Denmark	89
+Dominican Republic	5
+Ecuador	1
+Egypt	8
+Eritrea	1
+Estonia	18
+Ethiopia	29
+Finland	118
+France	318
+Gabon	1
+Georgia	23
+Germany	629
+Great Britain	322
+Greece	59
+Grenada	1
+Guatemala	1
+Hong Kong	3
+Hungary	145
+Iceland	15
+India	11
+Indonesia	22
+Iran	24
+Ireland	9
+Israel	4
+Italy	331
+Jamaica	80
+Japan	282
+Kazakhstan	42
+Kenya	39
+Kuwait	2
+Kyrgyzstan	3
+Latvia	17
+Lithuania	30
+Macedonia	1
+Malaysia	3
+Mauritius	1
+Mexico	38
+Moldova	5
+Mongolia	10
+Montenegro	14
+Morocco	11
+Mozambique	1
+Netherlands	318
+New Zealand	52
+Nigeria	39
+North Korea	21
+Norway	192
+Panama	1
+Paraguay	17
+Poland	80
+Portugal	9
+Puerto Rico	2
+Qatar	3
+Romania	123
+Russia	768
+Saudi Arabia	6
+Serbia	31
+Serbia and Montenegro	38
+Singapore	7
+Slovakia	35
+Slovenia	25
+South Africa	25
+South Korea	308
+Spain	205
+Sri Lanka	1
+Sudan	1
+Sweden	181
+Switzerland	93
+Syria	1
+Tajikistan	3
+Thailand	18
+Togo	1
+Trinidad and Tobago	19
+Tunisia	4
+Turkey	28
+Uganda	1
+Ukraine	143
+United Arab Emirates	1
+United States	1312
+Uruguay	1
+Uzbekistan	19
+Venezuela	4
+Vietnam	2
+Zimbabwe	7
+Time taken: 30.411 seconds, Fetched: 110 row(s)
+
+
+4]
+
+hive (OLYMPIC)> SELECT COUNTRY, SUM(GOLD_MEDALS) FROM OLYMPIC_DATA GROUP BY COUNTRY;
+
+Output -->>
+
+Afghanistan	0
+Algeria	2
+Argentina	49
+Armenia	0
+Australia	163
+Austria	36
+Azerbaijan	6
+Bahamas	11
+Bahrain	0
+Barbados	0
+Belarus	17
+Belgium	2
+Botswana	0
+Brazil	46
+Bulgaria	8
+Cameroon	20
+Canada	168
+Chile	3
+China	234
+Chinese Taipei	2
+Colombia	2
+Costa Rica	0
+Croatia	35
+Cuba	57
+Cyprus	0
+Czech Republic	14
+Denmark	46
+Dominican Republic	3
+Ecuador	0
+Egypt	1
+Eritrea	0
+Estonia	6
+Ethiopia	13
+Finland	11
+France	108
+Gabon	0
+Georgia	6
+Germany	223
+Great Britain	124
+Greece	12
+Grenada	1
+Guatemala	0
+Hong Kong	0
+Hungary	77
+Iceland	0
+India	1
+Indonesia	5
+Iran	10
+Ireland	1
+Israel	1
+Italy	86
+Jamaica	24
+Japan	57
+Kazakhstan	13
+Kenya	11
+Kuwait	0
+Kyrgyzstan	0
+Latvia	3
+Lithuania	5
+Macedonia	0
+Malaysia	0
+Mauritius	0
+Mexico	19
+Moldova	0
+Mongolia	2
+Montenegro	0
+Morocco	2
+Mozambique	1
+Netherlands	101
+New Zealand	18
+Nigeria	6
+North Korea	6
+Norway	97
+Panama	1
+Paraguay	0
+Poland	20
+Portugal	1
+Puerto Rico	0
+Qatar	0
+Romania	57
+Russia	234
+Saudi Arabia	0
+Serbia	1
+Serbia and Montenegro	11
+Singapore	0
+Slovakia	10
+Slovenia	5
+South Africa	10
+South Korea	110
+Spain	19
+Sri Lanka	0
+Sudan	0
+Sweden	57
+Switzerland	21
+Syria	0
+Tajikistan	0
+Thailand	6
+Togo	0
+Trinidad and Tobago	1
+Tunisia	2
+Turkey	9
+Uganda	1
+Ukraine	31
+United Arab Emirates	1
+United States	552
+Uruguay	0
+Uzbekistan	5
+Venezuela	1
+Vietnam	0
+Zimbabwe	2
+Time taken: 30.191 seconds, Fetched: 110 row(s)
+
+hive (OLYMPIC)> 
+
